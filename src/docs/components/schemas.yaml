@@ -1,0 +1,49 @@
+# User related schemas
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - email
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the user
+        email:
+          type: string
+          format: email
+          description: User's email address
+        name:
+          type: string
+          description: User's full name
+        role:
+          type: string
+          enum: [user, admin]
+          description: User's role in the system
+        createdAt:
+          type: string
+          format: date-time
+          description: Date and time when the user was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Date and time when the user was last updated
+      example:
+        id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        email: "user@example.com"
+        name: "John Doe"
+        role: "user"
+        createdAt: "2023-01-01T00:00:00.000Z"
+        updatedAt: "2023-01-01T00:00:00.000Z"
+    
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: HTTP status code
+        message:
+          type: string
+          description: Error message
