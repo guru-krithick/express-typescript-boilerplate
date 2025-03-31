@@ -1,4 +1,4 @@
-import app from '@/app';
+import app from '../app';
 
-// This is the main entry point for Vercel
+// This file serves as the entrypoint for Vercel
 export default app;
