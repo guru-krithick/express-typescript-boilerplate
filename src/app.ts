@@ -50,21 +50,71 @@ const options = {
       version: '1.0.0',
       description: 'A RESTful API built with Express and TypeScript',
     },
-    servers: [
-      {
-        url: config.apiPrefix,
-        description: 'API server',
-      },
-    ],
+
     components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
+      responses: {
+        NotFoundError: {
+          description: 'The requested resource was not found',
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'number',
+                    example: 404
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Resource not found'
+                  }
+                }
+              }
+            }
+          }
         },
-      },
-    },
+        ValidationError: {
+          description: 'Validation failed for the request parameters',
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'number',
+                    example: 400
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Validation failed'
+                  }
+                }
+              }
+            }
+          }
+        },
+        ServerError: {
+          description: 'Internal server error',
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  status: {
+                    type: 'number',
+                    example: 500
+                  },
+                  message: {
+                    type: 'string',
+                    example: 'Internal server error'
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   apis: ['./src/controllers/*.ts', './src/routes/*.ts', './src/docs/components/*.yaml'],
 };

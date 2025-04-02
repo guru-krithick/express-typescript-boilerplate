@@ -8,8 +8,6 @@ import { Request, Response } from 'express';
  *     description: Retrieve a list of all users
  *     tags:
  *       - Users
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: A list of users
@@ -28,10 +26,19 @@ import { Request, Response } from 'express';
  *                 message:
  *                   type: string
  *                   example: "Users retrieved successfully"
- *       401:
- *         $ref: '#/components/responses/UnauthorizedError'
  *       500:
- *         $ref: '#/components/responses/ServerError'
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   example: 500
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
  */
 const getAllUsers = (req: Request, res: Response) => {
   // For demo purposes only
@@ -61,8 +68,6 @@ const getAllUsers = (req: Request, res: Response) => {
  *     description: Retrieve a single user by their ID
  *     tags:
  *       - Users
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -87,12 +92,32 @@ const getAllUsers = (req: Request, res: Response) => {
  *                 message:
  *                   type: string
  *                   example: "User retrieved successfully"
- *       401:
- *         $ref: '#/components/responses/UnauthorizedError'
  *       404:
- *         $ref: '#/components/responses/NotFoundError'
+ *         description: The requested resource was not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   example: 404
+ *                 message:
+ *                   type: string
+ *                   example: "User not found"
  *       500:
- *         $ref: '#/components/responses/ServerError'
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: number
+ *                   example: 500
+ *                 message:
+ *                   type: string
+ *                   example: "Internal server error"
  */
 const getUserById = (req: Request, res: Response) => {
   const { id } = req.params;

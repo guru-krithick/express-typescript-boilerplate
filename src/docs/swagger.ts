@@ -17,28 +17,9 @@ const swaggerDefinition = {
       email: 'support@your-email.com',
     },
   },
-  servers: [
-    {
-      url: `http://localhost:${config.port}${config.apiPrefix}`,
-      description: 'Development server',
-    },
-    {
-      url: 'https://your-production-url.com/api',
-      description: 'Production server',
-    },
-  ],
+
   components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-      },
-    },
     responses: {
-      UnauthorizedError: {
-        description: 'Access token is missing or invalid',
-      },
       NotFoundError: {
         description: 'The requested resource was not found',
       },
@@ -54,10 +35,6 @@ const swaggerDefinition = {
     {
       name: 'Health',
       description: 'API health check endpoints',
-    },
-    {
-      name: 'Auth',
-      description: 'Authentication and authorization endpoints',
     },
     {
       name: 'Users',
