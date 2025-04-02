@@ -4,14 +4,14 @@
   "description": "Node.js Express TypeScript boilerplate optimized for Vercel deployment",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "nodemon",
-    "start": "node dist/server.js",
-    "build": "tsc && cp -r src/docs/components dist/docs/components",
-    "lint": "eslint src/**/*.ts",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "test": "jest",
-    "vercel-build": "tsc && cp -r src/docs/components dist/docs/components"
-  },
+  "dev": "nodemon",
+  "start": "node -r tsconfig-paths/register dist/server.js",
+  "build": "tsc && cp -r src/docs/components dist/docs/components",
+  "lint": "eslint src/**/*.ts",
+  "format": "prettier --write \"src/**/*.ts\"",
+  "test": "jest",
+  "vercel-build": "tsc && cp -r src/docs/components dist/docs/components && node transform-imports.js"
+},
   "engines": {
     "node": ">=14.x"
   },

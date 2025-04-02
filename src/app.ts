@@ -1,16 +1,19 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
+// Register path aliases first
+import './bootstrap';
+
+import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import routes from './routes';
-import config from './config';
-import { errorMiddleware } from './middleware';
-import logger from './utils/logger';
+import routes from '@/routes';
+import config from '@/config';
+import { errorMiddleware } from '@/middleware';
+import logger from '@/utils/logger';
 
-// Create the Express application
+// Create Express app
 const app = express();
 
 // Security middleware
@@ -27,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 // Compression middleware
 app.use(compression());
 
-// Logging middleware (only in non-test environments)
+// Logging middleware
 if (config.env !== 'test') {
   app.use(morgan(config.log.format, {
     stream: {
@@ -38,7 +41,7 @@ if (config.env !== 'test') {
   }));
 }
 
-// Define swagger options
+// Swagger setup
 const options = {
   swaggerDefinition: {
     openapi: '3.0.0',
@@ -69,14 +72,8 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 // Serve swagger docs
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-  explorer: true,
-  customCss: '.swagger-ui .topbar { display: none }',
-}));
-app.use(`${config.apiPrefix}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-  explorer: true,
-  customCss: '.swagger-ui .topbar { display: none }',
-}));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(`${config.apiPrefix}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
 app.use(config.apiPrefix, routes);
@@ -101,7 +98,6 @@ app.use((req: Request, res: Response) => {
 // Error middleware
 app.use(errorMiddleware);
 
-// For serverless environments (Vercel), export the Express app
-// This allows Vercel to import and use it directly
-module.exports = app;
+// Export for both local development and serverless
 export default app;
+module.exports = app;
