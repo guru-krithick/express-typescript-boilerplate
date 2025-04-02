@@ -1,10 +1,10 @@
-import app from '@/app';
-import config from '@/config';
-import logger from '@/utils/logger';
+import app from './app';
+import config from './config';
+import logger from './utils/logger';
 
-// Only create a server if we're not in a serverless environment
-// This prevents issues with Vercel deployment
-if (process.env.NODE_ENV !== 'production') {
+// Only create a server if we're running locally
+// This prevents issues with Vercel serverless deployment
+if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
   const PORT = config.port;
   
   const server = app.listen(PORT, () => {
@@ -37,5 +37,6 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-// Export the Express app for serverless environments like Vercel
+// Always export the Express app for serverless environments
+module.exports = app;
 export default app;
