@@ -72,7 +72,7 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 // Serve swagger docs
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(`${config.apiPrefix}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
@@ -82,7 +82,7 @@ app.use(config.apiPrefix, routes);
 app.get('/', (_req: Request, res: Response) => {
   res.json({
     message: 'API is running',
-    docs: `/api-docs`,
+    docs: `/docs`,
     health: `${config.apiPrefix}/health`
   });
 });

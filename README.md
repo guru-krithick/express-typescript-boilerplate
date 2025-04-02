@@ -71,7 +71,7 @@ npm run dev
 yarn dev
 ```
 
-5. Open http://localhost:3000/api-docs to view the API documentation
+5. Open http://localhost:8000/docs to view the API documentation
 
 ## Deployment to Vercel
 
@@ -117,7 +117,7 @@ vercel --prod
 
 ## API Documentation
 
-The API documentation is available at `/api-docs` when the server is running.
+The API documentation is available at `/docs` when the server is running.
 
 ## License
 

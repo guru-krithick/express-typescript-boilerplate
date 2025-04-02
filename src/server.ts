@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
   
   const server = app.listen(PORT, () => {
     logger.info(`Server is running on port ${PORT}`);
-    logger.info(`API Documentation: http://localhost:${PORT}/api-docs`);
+    logger.info(`API Documentation: http://localhost:${PORT}/docs`);
   });
   
   const exitHandler = () => {
