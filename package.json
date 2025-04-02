@@ -5,12 +5,12 @@
   "main": "dist/server.js",
   "scripts": {
   "dev": "nodemon",
-  "start": "node -r tsconfig-paths/register dist/server.js",
+  "start": "node -r module-alias/register dist/server.js",
   "build": "tsc && cp -r src/docs/components dist/docs/components",
   "lint": "eslint src/**/*.ts",
   "format": "prettier --write \"src/**/*.ts\"",
   "test": "jest",
-  "vercel-build": "tsc && cp -r src/docs/components dist/docs/components && node transform-imports.js"
+  "vercel-build": "tsc && cp -r src/docs/components dist/docs/components"
 },
   "engines": {
     "node": ">=14.x"
@@ -22,6 +22,7 @@
     "express": "^4.18.2",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.1",
+    "module-alias": "^2.2.3",
     "morgan": "^1.10.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
@@ -50,5 +51,8 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.6"
-  }
+  },
+  "_moduleAliases": {
+  "@": "dist"
+}
 }
