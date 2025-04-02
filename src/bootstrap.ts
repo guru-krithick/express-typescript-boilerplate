@@ -1,14 +1,9 @@
-// This sets up TypeScript path aliases at runtime
-import * as tsconfig from 'tsconfig-paths';
-import * as path from 'path';
+import path from 'path';
+import moduleAlias from 'module-alias';
 
-// Register path aliases
-const baseUrl = path.join(__dirname, '..');
-const { absoluteBaseUrl, paths } = require('../tsconfig.json').compilerOptions;
+const rootDirectory = path.resolve(__dirname, '..');
 
-tsconfig.register({
-  baseUrl,
-  paths: { 
-    '@/*': ['dist/*'] 
-  }
+// Add module aliases
+moduleAlias.addAliases({
+  '@': path.join(rootDirectory, 'dist'),
 });

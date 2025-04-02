@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { HttpException } from '@/middleware';
 
 /**
  * @swagger
@@ -115,7 +114,7 @@ const getUserById = (req: Request, res: Response) => {
       message: 'User retrieved successfully',
     });
   } else {
-    throw new HttpException(404, 'User not found');
+    console.log('User not found');
   }
 };
 

@@ -1,5 +1,5 @@
 import winston from 'winston';
-import config from '@/config';
+import config from '../config';
 
 // Define log format
 const logFormat = winston.format.printf(({ timestamp, level, message }) => {

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { ErrorResponse } from '@/types';
-import logger from '@/utils/logger';
-import config from '@/config';
+import { ErrorResponse } from '../types';
+import logger from '../utils/logger';
+import config from '../config';
 
 class HttpException extends Error {
   public status: number;

@@ -8,10 +8,10 @@ import morgan from 'morgan';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import routes from '@/routes';
-import config from '@/config';
-import { errorMiddleware } from '@/middleware';
-import logger from '@/utils/logger';
+import routes from './routes';
+import config from './config';
+import { errorMiddleware } from './middleware';
+import logger from './utils/logger';
 
 // Create Express app
 const app = express();
