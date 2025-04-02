@@ -139,7 +139,10 @@ const getUserById = (req: Request, res: Response) => {
       message: 'User retrieved successfully',
     });
   } else {
-    console.log('User not found');
+    res.status(404).json({
+      status: 404,
+      message: 'User not found'
+    });
   }
 };
 

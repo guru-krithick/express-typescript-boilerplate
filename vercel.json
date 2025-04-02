@@ -8,6 +8,14 @@
   ],
   "routes": [
     {
+      "src": "/docs/(.*)",
+      "dest": "/src/vercel.ts"
+    },
+    {
+      "src": "/api/docs/(.*)",
+      "dest": "/src/vercel.ts"
+    },
+    {
       "src": "/(.*)",
       "dest": "/src/vercel.ts"
     }
