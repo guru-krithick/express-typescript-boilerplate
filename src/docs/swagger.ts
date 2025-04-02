@@ -17,6 +17,7 @@ const swaggerDefinition = {
       email: 'support@your-email.com',
     },
   },
+
   components: {
     responses: {
       NotFoundError: {
@@ -45,8 +46,10 @@ const swaggerDefinition = {
 const options = {
   swaggerDefinition,
   apis: [
-    './src/**/*.ts',
-    './src/**/*.yaml',
+    './src/controllers/*.ts',
+    './src/routes/*.ts',
+    './src/models/*.ts',
+    './src/docs/components/*.yaml',
   ],
 };
 

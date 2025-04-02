@@ -50,6 +50,7 @@ const options = {
       version: '1.0.0',
       description: 'A RESTful API built with Express and TypeScript',
     },
+
     components: {
       responses: {
         NotFoundError: {
@@ -115,22 +116,14 @@ const options = {
       }
     }
   },
-  apis: ['./src/**/*.ts', './src/**/*.yaml'],
+  apis: ['./src/controllers/*.ts', './src/routes/*.ts', './src/docs/components/*.yaml'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
 
 // Serve swagger docs
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-  customCss: '.swagger-ui .topbar { display: none }',
-  customSiteTitle: "Express TypeScript API Documentation",
-  customfavIcon: '/favicon.ico'
-}));
-app.use(`${config.apiPrefix}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-  customCss: '.swagger-ui .topbar { display: none }',
-  customSiteTitle: "Express TypeScript API Documentation",
-  customfavIcon: '/favicon.ico'
-}));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(`${config.apiPrefix}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
 app.use(config.apiPrefix, routes);
@@ -138,14 +131,9 @@ app.use(config.apiPrefix, routes);
 // Root route
 app.get('/', (_req: Request, res: Response) => {
   res.json({
-    message: 'Express TypeScript Boilerplate API',
-    description: 'A production-ready boilerplate for building RESTful APIs using Node.js, Express, and TypeScript.',
-    documentation: '/docs',
-    healthCheck: `${config.apiPrefix}/health`,
-    apiEndpoints: {
-      users: `${config.apiPrefix}/users`
-    },
-    github: 'https://github.com/yourusername/express-typescript-vercel'
+    message: 'API is running',
+    docs: `/docs`,
+    health: `${config.apiPrefix}/health`
   });
 });
 
