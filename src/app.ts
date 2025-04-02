@@ -130,11 +130,7 @@ app.use(config.apiPrefix, routes);
 
 // Root route
 app.get('/', (_req: Request, res: Response) => {
-  res.json({
-    message: 'API is running',
-    docs: `/docs`,
-    health: `${config.apiPrefix}/health`
-  });
+  res.redirect('/docs');
 });
 
 // 404 handler
